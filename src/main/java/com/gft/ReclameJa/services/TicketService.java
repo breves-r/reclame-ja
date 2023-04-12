@@ -45,6 +45,7 @@ public class TicketService {
 	public Ticket update(Ticket ticket, Long id) {
 		Ticket ticketBd = this.findTicket(id);
 		ticket.setId(ticketBd.getId());
+		ticket.setUpdatedDate(ticketBd.getUpdatedDate());
 		
 		return this.saveTicket(ticket);
 	}
