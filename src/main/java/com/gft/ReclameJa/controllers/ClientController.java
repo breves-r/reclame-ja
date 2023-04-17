@@ -24,35 +24,44 @@ public class ClientController {
 	public ClientController(ClientService clientService) {
 		this.clientService = clientService;
 	}
-	
+
 	@GetMapping
 	public ResponseEntity<List<Client>> getAllClients() {
 		return ResponseEntity.ok(clientService.getAll());
 	}
-	
+
 	@PostMapping
 	public ResponseEntity<Client> saveClient(@RequestBody Client client) {
 		return ResponseEntity.status(201).body(clientService.saveClient(client));
 	}
-	
+
 	@GetMapping("{id}")
 	public ResponseEntity<Client> getClient(@PathVariable Long id) {
 		try {
 			return ResponseEntity.ok(clientService.findClient(id));
-		} catch(Exception ex) {
+		} catch (Exception ex) {
 			return ResponseEntity.notFound().build();
 		}
 	}
-	
+
+	@GetMapping("/cpf/{cpf}")
+	public ResponseEntity<Client> getClientByCpf(@PathVariable String cpf) {
+		try {
+			return ResponseEntity.ok(clientService.findClientByCpf(cpf));
+		} catch (Exception ex) {
+			return ResponseEntity.notFound().build();
+		}
+	}
+
 	@PutMapping("{id}")
 	public ResponseEntity<Client> updateClient(@RequestBody Client client, @PathVariable Long id) {
 		try {
 			return ResponseEntity.ok(clientService.update(client, id));
-		} catch(Exception ex) {
+		} catch (Exception ex) {
 			return ResponseEntity.notFound().build();
 		}
 	}
-	
+
 	@DeleteMapping("{id}")
 	public ResponseEntity<Client> deleteClient(@PathVariable Long id) {
 		try {

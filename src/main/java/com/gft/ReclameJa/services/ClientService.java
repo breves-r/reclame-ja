@@ -30,6 +30,10 @@ public class ClientService {
 		return clientRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Client not found"));
 	}
 	
+	public Client findClientByCpf(String cpf) {
+		return clientRepository.findByCpf(cpf).orElseThrow(() -> new EntityNotFoundException("Client not found"));
+	}
+	
 	public Client update(Client client, Long id) {
 		Client clientBd = this.findClient(id);
 		client.setId(clientBd.getId());
